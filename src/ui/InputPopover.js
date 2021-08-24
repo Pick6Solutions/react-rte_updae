@@ -87,6 +87,7 @@ export default class InputPopover extends Component {
             />
           </ButtonGroup>
         </div>
+        <div id="urlError12345312131" style={{color: 'red', display: 'none'}}>Not A URL</div>
         {this._renderCheckOptions()}
       </div>
     );
@@ -137,6 +138,17 @@ export default class InputPopover extends Component {
 
   _onSubmit() {
     let value = this._inputRef ? this._inputRef.value : '';
+    const element = document.getElementById('urlError12345312131');
+    if (!this.validURL(value)) {
+      if (element) {
+          element.style.display = 'block';
+      }
+      return;
+    } else {
+      if (element) {
+          element.style.display = 'none';
+      }
+    }
     this.props.onSubmit(value, this.state.checkOptionValues);
   }
 
@@ -152,5 +164,14 @@ export default class InputPopover extends Component {
     if (event.keyCode === 27) {
       this.props.onCancel();
     }
+  }
+  validURL(str) {
+    const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    return !!pattern.test(str);
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "react-rte",
-  "version": "0.16.3",
-  "description": "React Rich Text Editor",
+  "name": "html-verify-react-rte",
+  "version": "1.0.8",
+  "description": "React Rich Text Editor with url verification",
   "main": "dist/react-rte.js",
   "files": [
     "lib",

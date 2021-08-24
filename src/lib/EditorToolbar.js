@@ -233,7 +233,7 @@ export default class EditorToolbar extends Component {
     let linkLabel = linkConfig.label || 'Link';
     let removeLinkLabel = removeLinkConfig.label || 'Remove Link';
     let targetBlank = (entity && isCursorOnLink) ? entity.getData().target === '_blank' : false;
-    let noFollow = (entity && isCursorOnLink) ? entity.getData().rel === 'nofollow' : false;
+    // let noFollow = (entity && isCursorOnLink) ? entity.getData().rel === 'nofollow' : false;
 
     return (
       <ButtonGroup key={name}>
@@ -247,7 +247,7 @@ export default class EditorToolbar extends Component {
           onSubmit={this._setLink}
           checkOptions={{
             targetBlank: {label: 'Open link in new tab', defaultValue: targetBlank},
-            noFollow: {label: 'No follow', defaultValue: noFollow},
+            // noFollow: {label: 'No follow', defaultValue: noFollow},
           }}
         />
         <IconButton
