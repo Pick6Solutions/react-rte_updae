@@ -141,12 +141,12 @@ export default class InputPopover extends Component {
     const element = document.getElementById('urlError12345312131');
     if (!this.validURL(value)) {
       if (element) {
-          element.style.display = 'block';
+        element.style.display = 'block';
       }
       return;
     } else {
       if (element) {
-          element.style.display = 'none';
+        element.style.display = 'none';
       }
     }
     this.props.onSubmit(value, this.state.checkOptionValues);
@@ -165,13 +165,16 @@ export default class InputPopover extends Component {
       this.props.onCancel();
     }
   }
-  validURL(str) {
-    const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-    return !!pattern.test(str);
+
+  validURL(string) {
+    let url;
+
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;
+    }
+
+    return url.protocol === 'http:' || url.protocol === 'https:';
   }
 }
